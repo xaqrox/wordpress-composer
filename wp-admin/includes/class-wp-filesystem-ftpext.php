@@ -536,6 +536,9 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 			return false;
 		}
 
+		var_dump($this->link);
+		var_dump(debug_backtrace());
+		
 		if ( ! ftp_mkdir( $this->link, $path ) ) {
 			return false;
 		}
