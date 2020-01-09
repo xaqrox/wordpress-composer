@@ -83,11 +83,15 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 	 * @return bool True on success, false on failure.
 	 */
 	public function connect() {
+    var_dump($this->options);
+
 		if ( isset( $this->options['ssl'] ) && $this->options['ssl'] && function_exists( 'ftp_ssl_connect' ) ) {
 			$this->link = @ftp_ssl_connect( $this->options['hostname'], $this->options['port'], FS_CONNECT_TIMEOUT );
 		} else {
 			$this->link = @ftp_connect( $this->options['hostname'], $this->options['port'], FS_CONNECT_TIMEOUT );
 		}
+
+    var_dump($this->link);
 
 		if ( ! $this->link ) {
 			$this->errors->add(
@@ -537,7 +541,7 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 		}
 
 		var_dump($this->link);
-		var_dump(debug_backtrace());
+		var_dump(debug_backtrace(!DEBUG_BACKTRACE_PROVIDE_OBJECT));
 		
 		if ( ! ftp_mkdir( $this->link, $path ) ) {
 			return false;
